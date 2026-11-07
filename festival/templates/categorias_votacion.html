@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Categorías
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'inicio' %}">Inicio</a>
+
+    <span>›</span>
+
+    <span>Categorías</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="panel-principal">
+
+    <div class="encabezado-panel">
+
+        <h1 class="titulo-bienvenida">
+            Categorías de Votación
+        </h1>
+
+        <p class="subtitulo-bienvenida">
+            Selecciona una categoría para registrar tu voto.
+        </p>
+
+    </div>
+
+    <div class="contenedor-categorias">
+
+        {% for categoria in categorias %}
+
+        <div class="card-categoria">
+
+            <div class="info-categoria">
+
+                <h3 class="titulo-categoria">
+                    {{ categoria.nombre }}
+                </h3>
+
+            </div>
+
+            <a href="/votar/{{ categoria.id }}/"
+               class="btn-categoria">
+
+                Votar
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Login{% endblock %}
+
+{% block atras %}
+<a href="/" class="btn-solid theme-primary">
+    Atrás
+</a>
+
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+
+    {% if mensaje_exito %}
+    <div class="alert alert-success">
+        {{ mensaje_exito }}
+    </div>
+    {% endif %}
+
+    {% if mensaje %}
+    <div class="alert alert-danger">
+        {{ mensaje }}
+    </div>
+    {% endif %}
+
+    <h2 class="text-center mb-4 fw-bold">
+        Iniciar Sesión
+    </h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="text" name="correo" class="form-control" required placeholder="Correo registrado.">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+
+            <div class="input-group">
+                <input type="password" id="password" name="password" class="form-control" required placeholder="Contraseña registrada.">
+
+                <button id="togglePassword" class="btn-ver-password" type="button">
+                    Ver contraseña.
+                </button>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-50">
+                Ingresar
+            </button>
+        </div>
+
+        <a href="/registro/" class="btn-solid btn-styled theme-warning d-block mx-auto w-50 mt-3">
+            Registrarse
+        </a>
+
+    </form>
+
+</div>
+
+
+
+
+{% endblock %}

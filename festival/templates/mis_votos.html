@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Mis Votos
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'inicio' %}">Inicio</a>
+
+    <span>›</span>
+
+    <span>Mis Votos</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+
+
+<div class="card shadow p-4">
+
+    <h2 class="mb-4">
+        Mis Votos
+    </h2>
+
+    {% if votos %}
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+                    <th>Edición</th>
+                    <th>Categoría</th>
+                    <th>Opción</th>
+                    <th>Fecha</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for voto in votos %}
+
+                <tr>
+
+                    <td>
+                        {{ voto.edicion.nombre }}
+                    </td>
+
+                    <td>
+                        {{ voto.categoria.nombre }}
+                    </td>
+
+                    <td>
+                        {{ voto.opcion.nombre }}
+                    </td>
+
+                    <td>
+                        {{ voto.fecha_voto }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    {% else %}
+
+        <div class="alert alert-warning">
+            No tienes votos registrados.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Votación
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'inicio' %}">Inicio</a>
+
+    <span>›</span>
+
+    <a href="/categorias/">Categorías</a>
+
+    <span>›</span>
+
+    <span>{{ categoria.nombre }}</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="contenedor-votacion">
+
+    <div class="cabecera-votacion">
+
+        <h1 class="titulo-votacion">
+            {{ categoria.nombre }}
+        </h1>
+
+        <p class="descripcion-votacion">
+            Selecciona una opción para registrar tu voto.
+        </p>
+
+    </div>
+
+    {% if mensaje %}
+    <div class="alert alert-info">
+        {{ mensaje }}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {% for opcion in opciones %}
+
+        <label class="opcion-votacion">
+
+            <input type="radio" name="opcion" value="{{ opcion.id }}" required>
+
+            <span class="texto-opcion">
+                {{ opcion.nombre }}
+            </span>
+
+        </label>
+
+        {% endfor %}
+
+        {% if opciones %}
+
+        <button type="submit" class="boton-votar">
+
+            Registrar Voto
+
+        </button>
+
+        {% endif %}
+
+    </form>
+
+</div>
+
+{% endblock %}

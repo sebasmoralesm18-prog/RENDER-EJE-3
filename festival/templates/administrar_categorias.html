@@ -1,0 +1,157 @@
+
+{% extends 'base.html' %}
+
+{% block titulo %}
+Gestión de Categorías
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'panel_administrativo' %}">
+        Panel administrativo
+    </a>
+
+    <span>›</span>
+
+    <span>Gestión de categorías</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-4">
+
+    <div class="card shadow p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+                <h2 class="titulo-votacion">
+                    Gestión de Categorías
+                </h2>
+
+                <p>
+                    Administra las categorías de votación del Festival.
+                </p>
+            </div>
+
+            <a href="{% url 'crear_categoria' %}"
+               class="btn btn-success">
+
+                Nueva Categoría
+
+            </a>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-light">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Edición</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for categoria in categorias %}
+
+                    <tr>
+
+                        <td>{{ categoria.id }}</td>
+
+                        <td>{{ categoria.nombre }}</td>
+
+                        <td>{{ categoria.edicion.nombre }}</td>
+
+                        <td>
+
+                            {% if categoria.habilitada %}
+
+                                <span class="badge bg-success">
+                                    Habilitada
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+                                    Deshabilitada
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-primary btn-sm">
+                            
+                                Editar
+                            
+                            </a>
+
+                            <a href="{% url 'eliminar_categoria' categoria.id %}" class="btn btn-danger btn-sm">
+                            
+                                Eliminar
+                            
+                            </a>
+
+                            <form method="POST" action="{% url 'cambiar_estado_categoria' categoria.id %}">
+                            
+                                {% csrf_token %}
+                            
+                                {% if categoria.habilitada %}
+                            
+                                <button type="submit" class="btn btn-warning btn-sm">
+                                    Deshabilitar
+                                </button>
+                            
+                                {% else %}
+                            
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Habilitar
+                                </button>
+                            
+                                {% endif %}
+                            
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center">
+                            No hay categorías registradas.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

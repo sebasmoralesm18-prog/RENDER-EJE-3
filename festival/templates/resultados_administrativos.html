@@ -1,0 +1,192 @@
+
+{% extends 'base.html' %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'panel_administrativo' %}">Inicio</a>
+
+    <span>›</span>
+
+    <span>Resultados de votaciones</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="contenedor-admin pagina-resultados">
+
+    <div class="encabezado-admin">
+        <div>
+            <h1>Resultados de votaciones</h1>
+            <p>Consulta el avance de las votaciones por edición y categoría.</p>
+        </div>
+    </div>
+
+    <!-- FILTRO DE EDICIONES -->
+
+    <div class="tarjeta-admin">
+
+        <form method="GET" class="formulario-filtro">
+
+            <div class="campo">
+                <label for="edicion">Seleccionar edición</label>
+
+                <select name="edicion" id="edicion" required>
+
+                    <option value="">Seleccione una edición</option>
+
+                    {% for edicion in ediciones %}
+
+                        <option value="{{ edicion.id }}"
+                            {% if edicion_id == edicion.id|stringformat:"s" %}
+                                selected
+                            {% endif %}>
+                            {{ edicion.nombre }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+            </div>
+
+            <button type="submit" class="btn-principal">
+                Consultar resultados
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if edicion_id %}
+
+        <!-- TOTAL DE VOTOS -->
+
+        <div class="tarjeta-resumen">
+
+            <div>
+                <span>Total de votos registrados</span>
+                <h2>{{ total_votos }}</h2>
+            </div>
+
+        </div>
+
+
+        <!-- RESULTADOS POR CATEGORIA -->
+
+        {% for resultado in resultados %}
+
+            <div class="tarjeta-admin">
+
+                <div class="titulo-categoria">
+
+                    <div>
+                        <h2>{{ resultado.categoria.nombre }}</h2>
+                        <p>
+                            {{ resultado.categoria.edicion.nombre }}
+                        </p>
+                    </div>
+
+                    <span class="contador-votos">
+                        {{ resultado.total_votos }} votos
+                    </span>
+
+                </div>
+
+
+                {% if resultado.opciones %}
+
+                    <div class="tabla-contenedor">
+
+                        <table class="tabla-admin">
+
+                            <thead>
+                                <tr>
+                                    <th>Participante</th>
+                                    <th>Votos</th>
+                                    <th>Porcentaje</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% for opcion in resultado.opciones %}
+
+                                    <tr>
+
+                                        <td>{{ opcion.nombre }}</td>
+
+                                        <td>
+                                            {{ opcion.total_votos }}
+                                        </td>
+
+                                        <td>
+
+                                            {% if resultado.total_votos > 0 %}
+
+                                                {% widthratio opcion.total_votos resultado.total_votos 100 %}%
+
+                                            {% else %}
+
+                                                0%
+
+                                            {% endif %}
+
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    {% if resultado.total_votos == 0 %}
+
+                        <p class="mensaje-vacio">
+                            Esta categoría todavía no tiene votos registrados.
+                        </p>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <p class="mensaje-vacio">
+                        Esta categoría todavía no tiene participantes registrados.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        {% empty %}
+
+            <div class="tarjeta-admin mensaje-vacio">
+                No hay categorías registradas para esta edición.
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="tarjeta-admin mensaje-inicial">
+
+            <p>
+                Selecciona una edición para consultar los resultados
+                de sus votaciones.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

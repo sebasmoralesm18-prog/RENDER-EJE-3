@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Nueva Categoría
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'panel_administrativo' %}">
+        Panel administrativo
+    </a>
+
+    <span>›</span>
+
+    <a href="{% url 'administrar_categorias' %}">
+        Gestión de categorías
+    </a>
+
+    <span>›</span>
+
+    <span>Nueva categoría</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+
+    <h2 class="titulo-votacion">
+        Nueva Categoría
+    </h2>
+
+
+    <form method="POST" class="formulario-gestion">
+
+        {% csrf_token %}
+
+        <div class="grupo-formulario">
+
+            <label class="label">
+                Nombre de la categoría
+            </label>
+
+            {{ formulario.nombre }}
+
+        </div>
+
+        <div class="contenedor-categorias">
+
+            <label class="label-formulario">
+                Edición
+            </label>
+
+            {{ formulario.edicion }}
+
+        </div>
+
+
+        <label class="categoria-habilitada">
+        
+            {{ formulario.habilitada }}
+        
+            <span>Habilitada</span>
+        
+        </label>
+
+        <button type="submit" class="btn btn-success w-100">
+
+            Guardar Categoría
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

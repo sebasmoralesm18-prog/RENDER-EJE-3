@@ -1,0 +1,73 @@
+
+{% extends 'base.html' %}
+
+{% block titulo %}
+Editar Edición
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'panel_administrativo' %}">
+        Panel administrativo
+    </a>
+
+    <span>›</span>
+
+    <a href="{% url 'administrar_ediciones' %}">
+        Gestión de ediciones
+    </a>
+
+    <span>›</span>
+
+    <span>Editar edición</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="card shadow p-4 mx-auto mt-4" style="max-width: 600px;">
+
+    <h2 class="titulo-votacion">
+        Editar Edición
+    </h2>
+
+    <form method="POST" class="formulario-gestion">
+
+        {% csrf_token %}
+
+        <div class="grupo-formulario">
+
+            <label class="label">
+                Nombre de la edición
+            </label>
+
+            {{ formulario.nombre }}
+
+        </div>
+
+        <label class="edicion-activa">
+        
+            {{ formulario.activa }}
+        
+            <span>Edición activa</span>
+        
+        </label>
+
+        <button type="submit" class="btn btn-success w-100">
+            Guardar Cambios
+        </button>
+
+        <a href="{% url 'administrar_ediciones' %}"
+           class="btn btn-secondary w-100 mt-2">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

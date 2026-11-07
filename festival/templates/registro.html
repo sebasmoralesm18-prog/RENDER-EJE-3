@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Registro{% endblock %}
+
+{% block atras %}
+<a href="/" class="btn-solid theme-primary">
+    Atrás
+</a>
+{% endblock %}
+
+{% block contenido %}
+
+
+<div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+
+    <h2 class="text-center mb-4">
+        Registro de Usuarios.
+    </h2>
+
+    {% if mensaje %}
+    <div class="alert alert-success" required=>
+        {{ mensaje }}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ formulario.as_p }}
+
+        <button type="submit" class="btn btn-success w-100">
+            Registrarse
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

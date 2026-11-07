@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Administrar Opciones{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'panel_administrativo' %}">
+        Panel administrativo
+    </a>
+
+    <span>›</span>
+
+    <span>Gestión de opciones</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="container mt-4">
+
+    <div class="card shadow p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h2>Administrar Opciones</h2>
+
+            <a href="{% url 'crear_opcion' %}" class="btn btn-success">
+                Nueva Opción
+            </a>
+
+        </div>
+
+        <table class="table table-bordered table-hover">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for opcion in opciones %}
+
+                <tr>
+                    <td>{{ opcion.id }}</td>
+                    <td>{{ opcion.nombre }}</td>
+                    <td>{{ opcion.categoria.nombre }}</td>
+
+                    <td>
+
+                        <a href="{% url 'editar_opcion' opcion.id %}"
+                           class="btn btn-warning btn-sm">
+                            Editar
+                        </a>
+
+                        <a href="{% url 'eliminar_opcion' opcion.id %}"
+                           class="btn btn-danger btn-sm">
+                            Eliminar
+                        </a>
+
+                    </td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="4" class="text-center">
+                        No hay opciones registradas.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Bienvenido
+{% endblock %}
+
+{% block contenido %}
+
+<div class="panel-principal">
+
+    <div class="encabezado-panel">
+
+        <h1 class="titulo-bienvenida">
+            Bienvenido {{ usuario.nombre }}
+        </h1>
+
+        <p class="subtitulo-bienvenida">
+            Sistema de Votaciones Festival Vallenato 2026
+        </p>
+
+        <p class="descripcion-panel">
+            Participa en las votaciones, consulta tus votos y visualiza los resultados del festival.
+        </p>
+
+    </div>
+
+    <div class="menu-panel">
+
+        <a href="/categorias/" class="btn-menu btn-categorias">
+            Categorías
+        </a>
+
+        <a href="/mis-votos/" class="btn-menu btn-votos">
+            Mis Votos
+        </a>
+
+        <a href="/resultados/" class="btn-menu btn-resultados">
+            Resultados
+        </a>
+
+        <a href="{% url 'logout' %}" class="btn-menu btn-cerrar">
+            Cerrar Sesión
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Panel Administrativo{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'panel_administrativo' %}">Inicio</a>
+
+    <span>›</span>
+
+    <span>Panel administrativo</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+
+
+<div class="container mt-4">
+
+    <div class="card shadow p-4">
+
+
+
+        <div class="mb-4">
+
+            <h2 class="titulo-votacion">
+                Panel administrativo.
+            </h2>
+
+            <p style="color: #000000 !important; text-align: center;">
+                Bienvenido. Desde aquí puedes gestionar la información del Festival.
+            </p>
+
+        </div>
+
+
+        <!-- Tabla de módulos -->
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover">
+
+                <thead>
+                    <tr>
+                        <th>Módulo</th>
+                        <th>Descripción</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td><strong>Gestión de ediciones</strong></td>
+
+                        <td>
+                            Administrar las ediciones del Festival.
+                        </td>
+
+                        <td>
+                            <a href="{% url 'administrar_ediciones' %}" class="btn btn-primary btn-sm">
+                                Ingresar
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Gestión de categorías</strong></td>
+
+                        <td>
+                            Administrar las categorías de votación.
+                        </td>
+
+                        <td>
+                            <a href="{% url 'administrar_categorias' %}" class="btn btn-primary btn-sm">
+                                Ingresar
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Gestión de opciones</strong></td>
+
+                        <td>
+                            Administrar las opciones disponibles en cada categoría.
+                        </td>
+
+                        <td>
+                            <a href="{% url 'administrar_opciones' %}" class="btn btn-primary btn-sm">
+                                Ingresar
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Resultads</strong></td>
+
+                        <td>
+                            Administrar los resultados.
+                        </td>
+
+                        <td>
+                            <a href="{% url 'resultados_administrativos' %}" class="btn btn-primary btn-sm">
+                                Ingresar
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+
+
+            </table>
+
+        </div>
+
+        <a href="{% url 'logout' %}" class="btn-menu btn-cerrar">
+            Cerrar Sesión
+        </a>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

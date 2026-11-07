@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Resultados
+{% endblock %}
+
+{% block miga_pan %}
+
+<nav class="breadcrumb-festival">
+
+    <a href="{% url 'inicio' %}">Inicio</a>
+
+    <span>›</span>
+
+    <span>Resultados</span>
+
+</nav>
+
+{% endblock %}
+
+{% block contenido %}
+
+
+
+<div class="contenedor-resultados">
+
+    <h1 class="titulo-resultados">
+        Resultados de Votación
+    </h1>
+
+    {% for resultado in resultados %}
+
+    <div class="tarjeta-resultado">
+
+        <div class="cabecera-resultado">
+
+            <h3 class="nombre-categoria">
+                {{ resultado.categoria.nombre }}
+            </h3>
+
+        </div>
+
+        <div class="contenido-resultado">
+
+            {% for opcion in resultado.opciones %}
+
+            <div class="fila-resultado">
+
+                <span class="nombre-opcion">
+                    {{ opcion.nombre }}
+                </span>
+
+                <span class="cantidad-votos">
+                    {{ opcion.total_votos }} votos
+                </span>
+
+            </div>
+
+            {% empty %}
+
+            <div class="alert alert-warning">
+                No hay votos registrados.
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
